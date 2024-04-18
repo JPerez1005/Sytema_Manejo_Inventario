@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Website Presentation</title>
+    <link rel="stylesheet" href="/css/presentation.css">
+    <link rel="stylesheet" href="/css/header.css">
+    <link rel="stylesheet" href="/css/info.css">
+    <link rel="stylesheet" href="/css/card.css">
+    <link rel="stylesheet" href="/css/login.css">
+</head>
+<body>
+    <!--Header Section-->
+    <header id="header">
+        <a href="/" class="logo">Shop</a>
+        <ul class="nav">
+            <li><a th:href="@{/home}"><ion-icon name="home-outline"></ion-icon></a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Shopping</a></li>
+            <li><a href="#">Contact us</a></li>
+        </ul>
+        <ul class="util">
+            <li><a th:href="@{/home}"><ion-icon name="home-outline"></ion-icon></a></li>
+            <li><a class="btnLogin-popup"><ion-icon name="finger-print-outline"></ion-icon></a></li>
+            <li><a class="add-model"><ion-icon name="bag-handle-outline"></ion-icon></a></li>
+            <li><a class="theme-toggle"><ion-icon name="moon-outline"></ion-icon></a></li>
+        </ul>
+    </header>
+    <!-- Login-Modals -->
+    <div class="wrapper">
+        <span class="icon-close"><ion-icon name="close"></ion-icon></span>
+        <div class="form-box login">
+            <h2>Login</h2>
+            <form action="#">
+                <div class="input-box">
+                    <span class="icon"><ion-icon name="mail"></ion-icon></span>
+                    <input type="name" required>
+                    <label>Email</label>
+                </div>
+                <div class="input-box">
+                    <span class="icon"><ion-icon name="lock-closed"></ion-icon></span>
+                    <input type="password" required>
+                    <label>Password</label>
+                </div>
+                <div class="remember-forgot">
+                    <label><input type="checkbox">Remember me</label>
+                    <a href="#">Forgot Password?</a>
+                </div>
+                <button type="submit" class="btn">Login</button>
+                <div class="login-register">
+                    <p>Don't have an account? <a class="register-link">Register</a></p>
+                </div>
+            </form>
+        </div>
+
+        <div class="form-box register">
+            <h2>Registration</h2>
+            <form action="#">
+                <div class="input-box">
+                    <span class="icon"><ion-icon name="person"></ion-icon></span>
+                    <input type="text" required>
+                    <label>Username</label>
+                </div>
+                <div class="input-box">
+                    <span class="icon"><ion-icon name="mail"></ion-icon></span>
+                    <input type="email" required>
+                    <label>Email</label>
+                </div>
+                <div class="input-box">
+                    <span class="icon"><ion-icon name="lock-closed"></ion-icon></span>
+                    <input type="password" required>
+                    <label>Password</label>
+                </div>
+                <div class="remember-forgot">
+                    <label><input type="checkbox">Agree to the terms & conditions</label>
+                </div>
+                <button type="submit" class="btn">Register</button>
+                <div class="login-register">
+                    <p>Already have an account? <a class="login-link">Login</a></p>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!--Form Modals-->
+    <div class="wrapper-add">
+        <span class="icon-close2"><ion-icon name="close"></ion-icon></span>
+        <div class="form-box add">
+            <h2>Add Category</h2>
+            <form th:action="@{/categories}" th:object="${newCategory}" method="POST">
+                <div class="input-box">
+                    <span class="icon"><ion-icon name="folder-outline"></ion-icon></span>
+                    <input type="text" th:field="*{name}" required>
+                    <label>Name</label>
+                </div>
+                <div class="input-box">
+                    <span class="icon"><ion-icon name="leaf-outline"></ion-icon></span>
+                    <input type="text" th:field="*{img}" required>
+                    <label>Url image</label>
+                </div>
+                <div class="input-box">
+                    <span class="icon"><ion-icon name="ribbon-outline"></ion-icon></span>
+                    <input type="text" th:field="*{Description}" required>
+                    <label>Description</label>
+                </div>
+                <button type="submit" class="btn">Save</button>
+                <div class="login-register">
+                    <p>you don't want to add?<a class="add-link">Modify</a></p>
+                </div>
+            </form>
+        </div>
+
+        <div class="form-box register">
+            <h2>Registration</h2>
+            <form action="#">
+                <div class="input-box">
+                    <span class="icon"><ion-icon name="person"></ion-icon></span>
+                    <input type="text" required>
+                    <label>Username</label>
+                </div>
+                <div class="input-box">
+                    <span class="icon"><ion-icon name="mail"></ion-icon></span>
+                    <input type="email" required>
+                    <label>Email</label>
+                </div>
+                <div class="input-box">
+                    <span class="icon"><ion-icon name="lock-closed"></ion-icon></span>
+                    <input type="password" required>
+                    <label>Password</label>
+                </div>
+                <div class="remember-forgot">
+                    <label><input type="checkbox">Agree to the terms & conditions</label>
+                </div>
+                <button type="submit" class="btn">Register</button>
+                <div class="login-register">
+                    <p>Already have an account? <a class="modify-link">Login</a></p>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!--Presentation-->
+    <section class="content">
+        <div class="text">
+            <h1>
+                <span>Hello, Welcome to</span>
+                <span>Categories, You can create</span>
+                <span class="photographer">Your own Category</span>
+            </h1>
+        </div>
+
+        <div class="img_group">
+            <div class="inner_group_inner">
+                <img src="../img/c1.jpg">
+                <img src="../img/c2.jpg">
+                <img src="../img/c3.jpg">
+                <img src="../img/c4.jpg">
+            </div>
+        </div>
+
+        <div class="bottom_text">
+            <h5>American Photographer, Filmaker and musician</h5>
+        </div>
+
+    </section>
+    <!--Content-->
+    <section class="info">
+        <h1>Product List</h1>
+        <div class="cards-conteint">
+            <div class="card-container" th:each="c:${categories}">
+                <div class="card">
+                    <div class="front-content">
+                        <img th:src="${c.img}" alt="imagen">
+                        <p th:text="${c.name}"></p>
+                    </div>
+                    <div class="content">
+                        <p class="heading" th:text="${c.name}"></p>
+                        <p th:text="${c.description}"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!--Scripts IoIcons-->
+    <script type="module" 
+    src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js">
+    </script>
+    <script nomodule 
+    src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js">
+    </script>
+    <!-- jquery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <!-- lettering js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lettering.js/0.7.0/jquery.lettering.min.js"></script>
+    <!-- gsap js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- direct scripts -->
+    <script src="../js/change_background.js"></script>
+    <script src="../js/presentation.js"></script>
+    <script src="../js/login.js"></script>
+    <script src="../js/add_model.js"></script>
+</body>
+</html>

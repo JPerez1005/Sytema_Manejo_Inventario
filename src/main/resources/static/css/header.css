@@ -1,0 +1,116 @@
+/* 
+    Created on : 3/03/2024, 5:34:34 p. m.
+    Author     : perez
+*/
+
+:root{
+    --bg : #111111;
+    --tc : #f1f1f1;
+    --primary: #ff0051;
+    --second: #3a3a3a;
+    --third: #f2f2f2;
+    --four: #b28405;
+    --five: #795300;
+    --six: #efb810;
+    --seven: #f9db5c;
+    --eight: #ffff94;
+}
+
+.dark{
+    --bg : #f1f1f1;
+    --tc : #010101;
+}
+
+/*Header section*/
+
+header{
+    position: fixed;
+    top: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px 100px;
+    background: transparent;
+    transition: 0.5s;
+    z-index: 1100;
+}
+
+.logo{
+    position: relative;
+    font-size: 30px;
+    color: var(--tc);
+    letter-spacing: 2px;
+    font-weight: 800;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+.nav{
+    display: flex;
+    align-items: center;
+}
+
+.nav li{
+    position: relative;
+    list-style: none;
+    margin: 0 20px;
+}
+
+.nav li a{
+    color: var(--tc);
+    text-decoration: none;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: 0.5s;
+    font-weight: 300;
+    font-size: 1em;
+    letter-spacing: 1px;
+    padding: 10px;
+}
+
+.nav li a:hover{
+    color: var(--four);
+}
+
+.util{
+    display: flex;
+    align-items: center;
+}
+
+.util li{
+    position: relative;
+    list-style: none;
+    margin: 0 10px;
+}
+
+.util li a{
+    text-decoration: none;
+    color: var(--tc);
+    transition: 0.5s;
+}
+
+.util li a ion-icon{
+    font-size: 1.6em;
+}
+
+.util li a:hover{
+    color: var(--four);
+}
+
+.util li .number{
+    position: absolute;
+    right: -1px;
+    bottom: 3px;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: var(--four);
+    color: var(--tc);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.6em;
+    font-weight: 400;
+}
+

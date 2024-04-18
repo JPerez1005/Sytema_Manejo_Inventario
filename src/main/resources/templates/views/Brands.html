@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- slick-carousel -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.css" integrity="sha512-6lLUdeQ5uheMFbWm3CP271l14RsX1xtx+J5x2yeIDkkiBpeVTNhTqijME7GgRKKi6hCqovwCoBTlRBEC20M8Mg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.min.css" integrity="sha512-17EgCFERpgZKcm0j0fEq1YCJuyAWdz9KUtv1EjVuaOz8pDnh/0nZxmU6BBXwaaxqoi9PQXnRWqlcDB027hgv9A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- aos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" integrity="sha512-1cK78a1o+ht2JcaW6g8OXYwqpev9+6GqOkz9xmBN9iUUhIndKtxwILGWYOSibOKjLsEdjyjZvYDq/cZwNeak0w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- my styles -->
+    <link rel="stylesheet" href="/css/header.css">
+    <link rel="stylesheet" href="/css/brands.css">
+    <link rel="stylesheet" href="/css/login.css">
+</head>
+<body>
+    <!--Header Section-->
+    <header id="header">
+        <a href="/" class="logo">Shop</a>
+        <ul class="nav">
+            <li><a th:href="@{/home}"><ion-icon name="home-outline"></ion-icon></a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Shopping</a></li>
+            <li><a href="#">Contact us</a></li>
+        </ul>
+        <ul class="util">
+            <li><a th:href="@{/home}"><ion-icon name="home-outline"></ion-icon></a></li>
+            <li><a class="btnLogin-popup"><ion-icon name="finger-print-outline"></ion-icon></a></li>
+            <li><a class="add-model"><ion-icon name="bag-handle-outline"></ion-icon></a></li>
+            <li><a class="theme-toggle"><ion-icon name="moon-outline"></ion-icon></a></li>
+        </ul>
+    </header>
+    <!-- Login-Modals -->
+    <div class="wrapper">
+        <span class="icon-close"><ion-icon name="close"></ion-icon></span>
+        <div class="form-box login">
+            <h2>Login</h2>
+            <form action="#">
+                <div class="input-box">
+                    <span class="icon"><ion-icon name="mail"></ion-icon></span>
+                    <input type="name" required>
+                    <label>Email</label>
+                </div>
+                <div class="input-box">
+                    <span class="icon"><ion-icon name="lock-closed"></ion-icon></span>
+                    <input type="password" required>
+                    <label>Password</label>
+                </div>
+                <div class="remember-forgot">
+                    <label><input type="checkbox">Remember me</label>
+                    <a href="#">Forgot Password?</a>
+                </div>
+                <button type="submit" class="btn">Login</button>
+                <div class="login-register">
+                    <p>Don't have an account? <a class="register-link">Register</a></p>
+                </div>
+            </form>
+        </div>
+
+        <div class="form-box register">
+            <h2>Registration</h2>
+            <form action="#">
+                <div class="input-box">
+                    <span class="icon"><ion-icon name="person"></ion-icon></span>
+                    <input type="text" required>
+                    <label>Username</label>
+                </div>
+                <div class="input-box">
+                    <span class="icon"><ion-icon name="mail"></ion-icon></span>
+                    <input type="email" required>
+                    <label>Email</label>
+                </div>
+                <div class="input-box">
+                    <span class="icon"><ion-icon name="lock-closed"></ion-icon></span>
+                    <input type="password" required>
+                    <label>Password</label>
+                </div>
+                <div class="remember-forgot">
+                    <label><input type="checkbox">Agree to the terms & conditions</label>
+                </div>
+                <button type="submit" class="btn">Register</button>
+                <div class="login-register">
+                    <p>Already have an account? <a class="login-link">Login</a></p>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!--Form Modals-->
+    <div class="wrapper-add">
+        <span class="icon-close2"><ion-icon name="close"></ion-icon></span>
+        <div class="form-box add" id="add-brand">
+            <h2>Add Brand</h2>
+            <!-- <h2 th:if="${newBrand.id}!=null">Edit Brand</h2> -->
+            <form th:action="@{/brands}" th:object="${newBrand}" method="POST">
+                <div class="input-box">
+                    <span class="icon"><ion-icon name="folder-outline"></ion-icon></span>
+                    <input type="text" th:field="*{name}" required>
+                    <label>Name</label>
+                </div>
+                <div class="input-box">
+                    <span class="icon"><ion-icon name="leaf-outline"></ion-icon></span>
+                    <input type="text" th:field="*{img}" required>
+                    <label>Url image</label>
+                </div>
+                <div class="input-box">
+                    <span class="icon"><ion-icon name="ribbon-outline"></ion-icon></span>
+                    <input type="text" th:field="*{Description}" required>
+                    <label>Description</label>
+                </div>
+                <select th:field="*{c}" required>
+                    <th:block th:each="c:${categories}">
+                        <option th:text="${c.name}" th:value="${c.id}"></option>
+                    </th:block>
+                </select>
+                <button type="submit" class="btn">Save</button>
+                <div class="login-register">
+                    <p>you don't want to add?<a class="add-link">Modify</a></p>
+                </div>
+            </form>
+        </div>
+
+        <div class="form-box register">
+            <h2>Edit Brand</h2>
+            <form th:action="@{/brands}" th:object="${editBrand}" method="POST">
+                <div class="input-box">
+                    <span class="icon"><ion-icon name="key-outline"></ion-icon></span>
+                    <input type="number" th:field="*{id}" required readonly>
+                    <label style="top: -5px;">Id:</label>
+                </div>
+                <div class="input-box">
+                    <span class="icon"><ion-icon name="folder-outline"></ion-icon></span>
+                    <input type="text" th:field="*{name}" required>
+                    <label>Name</label>
+                </div>
+                <div class="input-box">
+                    <span class="icon"><ion-icon name="leaf-outline"></ion-icon></span>
+                    <input type="text" th:field="*{img}" required>
+                    <label>Url image</label>
+                </div>
+                <div class="input-box">
+                    <span class="icon"><ion-icon name="ribbon-outline"></ion-icon></span>
+                    <input type="text" th:field="*{Description}" required>
+                    <label>Description</label>
+                </div>
+                <select th:field="*{c}" required>
+                    <th:block th:each="c:${categories}">
+                        <option th:text="${c.name}" th:value="${c.id}"></option>
+                    </th:block>
+                </select>
+                <button type="submit" class="btn">Update</button>
+                <div class="login-register">
+                    <p>Already have an account? <a class="modify-link">Login</a></p>
+                </div>
+            </form>
+        </div>
+    </div>
+    <main id="luxy">
+
+        <!-- HERO SECTION -->
+        <div class="hero_sec luxy_el">
+            <div class="hero_text">
+                <p data-aos="zoom-out" data-aos-duration="1500" data-aos-delay="1400">sustainable experience</p>
+                <h1 data-aos="zoom-out" data-aos-duration="1500" data-aos-delay="2100">Whathever the<br>cloths<br>feels good</h1>
+                <a href="#sectionList" data-aos="zoom-out" data-aos-duration="1500" data-aos-delay="2800"  class="btn-primary">Scroll down to more details</a>
+            </div>
+            <div data-aos="flip-right" data-aos-duration="1500" data-aos-delay="4500" class="star">
+                <img src="/img/star.png" alt="">
+            </div>
+        </div>
+
+        <!-- SECTION 1 -->
+        <section class="sec1 luxy_el">
+            <div class="sec1_img_group">
+                <div class="sec1_img sec1_img1" data-aos="fade-up" data-aos-duration="2000">
+                    <img src="/img/selenaGomez.jpg" alt="imagen_inicial">
+                </div>
+                <div data-aos="fade-up" data-aos-duration="1000" data-aos-delay="1000" class="sec1_img sec1_img2">
+                    <img src="/img/cr73.jpg" alt="imagen_inicial">
+                </div>
+                <div data-aos="fade-up" data-aos-duration="1000" data-aos-delay="1500" class="sec1_img sec1_img3">
+                    <img src="/img/zhaoLusi3.jpg" alt="imagen_inicial">
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 2 -->
+        <section class="sec2 luxy_el">
+            <div class="sec_text">
+                <h2 data-aos="zoom-out" data-aos-duration="1500" data-aos-delay="500">letius<br>fashion</h2>
+                <div class="sec_text_desc">
+                    <div data-aos="fade-up" data-aos-duration="1000" data-aos-delay="1000" class="sec_text_desc_p">
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias id illum suscipit optio reiciendis laborum animi quia non, nihil rem recusandae temporibus eum necessitatibus corrupti aut praesentium expedita iusto aperiam.</p>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias id illum suscipit optio reiciendis laborum animi quia non, nihil rem recusandae temporibus eum necessitatibus corrupti aut praesentium expedita iusto aperiam.</p>
+                    </div>
+                    <a data-aos="zoom-out" data-aos-duration="1500" data-aos-delay="1000" href="#" class="btn-primary">click to more details</a>
+                </div>
+            </div>
+            <div data-aos="fade-up" data-aos-duration="1500" data-aos-delay="1500" class="sec_img">
+                <img src="/img/zhaoLusi2.jpg" alt="">
+            </div>
+        </section>
+
+        <!-- SECTION 3 -->
+        <section class="sec3 luxy_el">
+            <div data-aos="fade-up" data-aos-duration="1500" data-aos-delay="500" class="sec_img">
+                <img src="/img/stephen.jpg" alt="">
+            </div>
+            <div class="sec_text">
+                <h2 data-aos="zoom-out" data-aos-duration="1500" data-aos-delay="1000">letius<br>fashion</h2>
+                <div class="sec_text_desc">
+                    <div data-aos="fade-up" data-aos-duration="1000" data-aos-delay="1000" class="sec_text_desc_p">
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias id illum suscipit optio reiciendis laborum animi quia non, nihil rem recusandae temporibus eum necessitatibus corrupti aut praesentium expedita iusto aperiam.</p>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias id illum suscipit optio reiciendis laborum animi quia non, nihil rem recusandae temporibus eum necessitatibus corrupti aut praesentium expedita iusto aperiam.</p>
+                    </div>
+                    <a data-aos="zoom-out" data-aos-duration="1500" data-aos-delay="1000" href="#" class="btn-primary">click to more details</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 4 -->
+        <section class="sec4 luxy_el">
+            <h3 data-aos="zoom-out" data-aos-duration="1500" data-aos-delay="500">Brand / Designer / celebrity / model / tailor / sustainable</h3>
+            <div class="sec4_img_group">
+                <div data-aos="fade-right" data-aos-duration="1500" data-aos-delay="1000" class="sec4_img1">
+                    <img src="/img/chrisHemsworth.jpg" alt="">
+                </div>
+                <div data-aos="fade-up" data-aos-duration="1500" data-aos-delay="1400" class="sec4_img2">
+                    <img src="/img/ryanReynolds.jpg" alt="">
+                </div>
+                <div data-aos="fade-left" data-aos-duration="1500" data-aos-delay="1000" class="sec4_img3">
+                    <img src="/img/jeniferLawrence3.jpg" alt="">
+                </div>
+            </div>
+            <div class="star" data-aos="flip-right" data-aos-duration="1500" data-aos-delay="700">
+                <img src="/img/star.png" alt="">
+            </div>
+        </section>
+
+        <!-- LISTS BRANDS SECTION -->
+        <section id="sectionList" class="secList luxy_el">
+            <div id="app" class="container">
+                <div th:each="b : ${brands}" class="box" data-aos="fade-right" data-aos-duration="1500" data-aos-delay="1000">
+                    <div class="figure">
+                        <img th:src="${b.img}" alt="">
+                        <div class="caption">
+                            <div class="about">
+                                <h2 th:text="${b.name}">Nike</h2>
+                                <p th:text="${b.Description}">Nike es</p>
+                                <p th:text="${b.c.name}"></p>
+                                <div class="group-buttons">
+                                    <a th:href="@{'/brands/modify'+'/'+${b.id}}">
+                                        Modify
+                                    </a>
+                                    <a th:href="@{'/brands/delete'+'/'+${b.id}}">
+                                        Delete
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- SECTION 5 -->
+        <!--section class="sec5 luxy_el">
+            <div class="overlay_text">
+                <h2 data-aos="zoom-out" data-aos-duration="1500" data-aos-delay="500">sustainable clothings</h2>
+            </div>
+            <img src="/img/cancha.jpg" alt="">
+        </section>-->
+
+        <!-- FOOTER -->
+        <!--
+        <footer class="luxy_el">
+            <div class="circular_text">
+
+            </div>
+            <p>for inquiry</p>
+            <a href="mailto:perezbuenojuliandavid@gmail.com">Perezbuenojuliandavid@gmail.com</a>
+        </footer>
+        -->
+    </main>
+
+    <!--Scripts IoIcons-->
+    <script type="module" 
+    src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js">
+    </script>
+    <script nomodule 
+    src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js">
+    </script>
+    <!-- JQuery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- slick-carousel -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js" integrity="sha512-HGOnQO9+SP1V92SrtZfjqxxtLmVzqZpjFFekvzZVWoiASSQgSr4cw9Kqd2+l8Llp4Gm0G8GIFJ4ddwZilcdb8A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- aos -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js" integrity="sha512-A7AYk1fGKX6S2SsHywmPkrnzTZHrgiVT7GcQkLGDe2ev0aWb8zejytzS8wjo7PGEXKqJOrjQ4oORtnimIRZBtw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- luxy js -->
+    <script src="/js/luxy.js"></script>
+    <!-- gsap -->
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <!-- ScrollTrigger -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/ScrollTrigger.min.js"></script>
+    <!-- My scripts -->
+    <script src="/js/brands.js"></script>
+    <script src="/js/login.js"></script>
+    <script src="/js/add_model.js"></script>
+    <script src="/js/change_background.js"></script>
+</body>
+</html>

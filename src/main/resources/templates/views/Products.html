@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products | Inventory Manage System</title>
+    <!-- aos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css"
+        integrity="sha512-1cK78a1o+ht2JcaW6g8OXYwqpev9+6GqOkz9xmBN9iUUhIndKtxwILGWYOSibOKjLsEdjyjZvYDq/cZwNeak0w=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- my styles -->
+    <link rel="stylesheet" href="/css/header.css">
+    <link rel="stylesheet" href="/css/login.css">
+    <link rel="stylesheet" href="/css/card.css">
+    <link rel="stylesheet" href="/css/products.css">
+</head>
+
+<body>
+    <!--Header Section-->
+    <header id="header">
+        <a href="/" class="logo">Shop</a>
+        <ul class="nav">
+            <li><a th:href="@{/home}"><ion-icon name="home-outline"></ion-icon></a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Shopping</a></li>
+            <li><a href="#">Contact us</a></li>
+        </ul>
+        <ul class="util">
+            <li><a th:href="@{/home}"><ion-icon name="home-outline"></ion-icon></a></li>
+            <li><a class="btnLogin-popup"><ion-icon name="finger-print-outline"></ion-icon></a></li>
+            <li><a class="add-model"><ion-icon name="bag-handle-outline"></ion-icon></a></li>
+            <li><a class="theme-toggle"><ion-icon name="moon-outline"></ion-icon></a></li>
+        </ul>
+    </header>
+    <!-- Login-Modals -->
+    <div class="wrapper">
+        <span class="icon-close"><ion-icon name="close"></ion-icon></span>
+        <div class="form-box login">
+            <h2>Login</h2>
+            <form action="#">
+                <div class="input-box">
+                    <span class="icon"><ion-icon name="mail"></ion-icon></span>
+                    <input type="name" required>
+                    <label>Email</label>
+                </div>
+                <div class="input-box">
+                    <span class="icon"><ion-icon name="lock-closed"></ion-icon></span>
+                    <input type="password" required>
+                    <label>Password</label>
+                </div>
+                <div class="remember-forgot">
+                    <label><input type="checkbox">Remember me</label>
+                    <a href="#">Forgot Password?</a>
+                </div>
+                <button type="submit" class="btn">Login</button>
+                <div class="login-register">
+                    <p>Don't have an account? <a class="register-link">Register</a></p>
+                </div>
+            </form>
+        </div>
+
+        <div class="form-box register">
+            <h2>Registration</h2>
+            <form action="#">
+                <div class="input-box">
+                    <span class="icon"><ion-icon name="person"></ion-icon></span>
+                    <input type="text" required>
+                    <label>Username</label>
+                </div>
+                <div class="input-box">
+                    <span class="icon"><ion-icon name="mail"></ion-icon></span>
+                    <input type="email" required>
+                    <label>Email</label>
+                </div>
+                <div class="input-box">
+                    <span class="icon"><ion-icon name="lock-closed"></ion-icon></span>
+                    <input type="password" required>
+                    <label>Password</label>
+                </div>
+                <div class="remember-forgot">
+                    <label><input type="checkbox">Agree to the terms & conditions</label>
+                </div>
+                <button type="submit" class="btn">Register</button>
+                <div class="login-register">
+                    <p>Already have an account? <a class="login-link">Login</a></p>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!--Form Modals-->
+    <div class="wrapper-add">
+        <span class="icon-close2"><ion-icon name="close"></ion-icon></span>
+        <div class="form-box add" id="add-brand">
+            <h2>Add Product</h2>
+            <!-- <h2 th:if="${newBrand.id}!=null">Edit Brand</h2> -->
+            <form th:action="@{/products}" th:object="${newProduct}" method="POST">
+                <div class="input-box">
+                    <span class="icon"><ion-icon name="folder-outline"></ion-icon></span>
+                    <input type="text" th:field="*{name}" required>
+                    <label>Name</label>
+                </div>
+                <div class="input-box">
+                    <span class="icon"><ion-icon name="leaf-outline"></ion-icon></span>
+                    <input type="text" th:field="*{img}" required>
+                    <label>Url image</label>
+                </div>
+                <div class="input-box">
+                    <span class="icon"><ion-icon name="ribbon-outline"></ion-icon></span>
+                    <input type="text" th:field="*{Description}" required>
+                    <label>Description</label>
+                </div>
+                <div class="input-box">
+                    <span class="icon"><ion-icon name="ribbon-outline"></ion-icon></span>
+                    <input type="number" th:field="*{price}" required>
+                    <label>Precio</label>
+                </div>
+                <select th:field="*{b}" required>
+                    <th:block th:each="b:${brands}">
+                        <option th:text="${b.name}" th:value="${b.id}"></option>
+                    </th:block>
+                </select>
+                <button type="submit" class="btn">Save</button>
+                <div class="login-register">
+                    <p>you don't want to add?<a class="add-link">Modify</a></p>
+                </div>
+            </form>
+        </div>
+
+        <div class="form-box register">
+            <h2>Edit Product</h2>
+            <form th:action="@{/products}" th:object="${editProduct}" method="POST">
+                <!-- <div class="input-box">
+                    <span class="icon"><ion-icon name="key-outline"></ion-icon></span>
+                    <input type="number" th:field="*{id}" required readonly>
+                    <label style="top: -5px;">Id:</label>
+                </div>
+                <div class="input-box">
+                    <span class="icon"><ion-icon name="folder-outline"></ion-icon></span>
+                    <input type="text" th:field="*{name}" required>
+                    <label>Name</label>
+                </div>
+                <div class="input-box">
+                    <span class="icon"><ion-icon name="leaf-outline"></ion-icon></span>
+                    <input type="text" th:field="*{img}" required>
+                    <label>Url image</label>
+                </div>
+                <div class="input-box">
+                    <span class="icon"><ion-icon name="ribbon-outline"></ion-icon></span>
+                    <input type="text" th:field="*{Description}" required>
+                    <label>Description</label>
+                </div>
+                <select th:field="*{b}" required>
+                    <th:block th:each="b:${brands}">
+                        <option th:text="${b.name}" th:value="${b.id}"></option>
+                    </th:block>
+                </select>-->
+                <button type="submit" class="btn">Update</button>
+                <div class="login-register">
+                    <p>Already have an account? <a class="modify-link">Login</a></p>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- Content -->
+        <div class="container">
+
+            <h1 class="title-fixed">
+                Hola bienvenido, a la sección de productos
+            </h1>
+            <div class="left-wall"></div>
+            <div class="right-wall"></div>
+            <!-- <div class="scroll-text">Texto que se desplaza horizontalmente</div> -->
+
+        </div>
+        <div id="main">
+            <div id="top">
+                <!-- <h1 id="top-h" class="title-fixed2">Lista de Productos</h1> -->
+                <h1 id="top-h">Lista de Productos</h1>
+            </div>
+            <div id="center">
+                <div class="product-list">
+                    <div class="card-container" th:each="p:${products}">
+                        <div class="card">
+                            <div class="front-content">
+                                <img th:src="${p.img}" alt="imagen">
+                                <p th:text="${p.name}"></p>
+                            </div>
+                            <div class="content">
+                                <p class="heading" th:text="${p.name}"></p>
+                                <p th:text="${p.description}"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="bottom">
+                <!-- <h1 id="bottom-h" class="title-fixed2">Lista de Productos</h1> -->
+                <h1 id="bottom-h">Lista de Productos</h1>
+            </div>
+        </div>
+        <!-- <div class="conteiner"> -->
+            <!-- <div class="product-list">
+                <div class="card-container" th:each="p:${products}">
+                    <div class="card">
+                        <div class="front-content">
+                            <img th:src="${p.img}" alt="imagen">
+                            <p th:text="${p.name}"></p>
+                        </div>
+                        <div class="content">
+                            <p class="heading" th:text="${p.name}"></p>
+                            <p th:text="${p.description}"></p>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+        <!-- </div> -->
+        <section class="seguimiento" style="height: 100vh;">
+
+        </section>
+            
+        
+
+    <!-- Gsap  -->
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <!-- scrollTrigger -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/ScrollTrigger.min.js"></script>
+    <!--Scripts IoIcons-->
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js">
+    </script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js">
+    </script>
+    <!-- aos -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"
+        integrity="sha512-A7AYk1fGKX6S2SsHywmPkrnzTZHrgiVT7GcQkLGDe2ev0aWb8zejytzS8wjo7PGEXKqJOrjQ4oORtnimIRZBtw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer">
+        </script>
+    <!-- JQuery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+        integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- My scripts -->
+    <script src="/js/login.js"></script>
+    <script src="/js/add_model.js"></script>
+    <script src="/js/change_background.js"></script>
+    <script src="/js/products.js"></script>
+</body>
+
+</html>

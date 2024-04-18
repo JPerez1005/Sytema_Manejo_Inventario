@@ -1,0 +1,111 @@
+:root{
+    --bg : #111111;
+    --tc : #f1f1f1;
+    --primary: #ff0051;
+    --second: #000;
+    --third: #f2f2f2;
+    --four: #b28405;
+    --five: #795300;
+    --six: #efb810;
+    --seven: #f9db5c;
+    --eight: #ffff94;
+}
+
+.dark{
+    --four: #efb810;
+}
+
+.cards-conteint{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 50px;
+    margin-top: 100px;
+    
+}
+
+.card-container {
+    width: 300px;
+    height: 300px;
+    position: relative;
+    border-radius: 10px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    background-color: #e8e8e8;
+}
+
+.card {
+    width: 300px;
+    height: 300px;
+    border-radius: inherit;
+}
+
+.card .front-content {
+    width: 300px;
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 2s cubic-bezier(0.23, 1, 0.320, 1);
+    border-radius: 5px;
+}
+
+.card .front-content img {
+    width: 100%; /* Ancho del contenedor */
+    height: 100%; /* Altura del contenedor */
+    object-fit: cover; /* Mantiene la relación de aspecto y ajusta la imagen dentro del contenedor */
+    object-position: center; /* Centra la imagen horizontalmente */
+    position: absolute;
+    z-index: 0;
+}
+
+.card .front-content p {
+    font-size: 32px;
+    font-weight: 700;
+    opacity: 1;
+    background: linear-gradient(-45deg, var(--four) 0%, var(--third) 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    transition: all 2s cubic-bezier(0.23, 1, 0.320, 1);
+    z-index: 1;
+}
+
+.card .content {
+    position: absolute;
+    bottom: -2%;
+    left: 0;
+    width: 300px;
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 0px;
+    background: linear-gradient(-45deg, var(--four) 0%, var(--third) 100%);
+    color: var(--second);
+    padding: 20px;
+    line-height: 1.5;
+    border-radius: 5px;
+    pointer-events: none;
+    transform: translateY(96%);
+    transition: all 2s cubic-bezier(0.23, 1, 0.320, 1);
+}
+
+.card .content .heading {
+    font-size: 32px;
+    font-weight: 700;
+}
+
+.card:hover .content {
+    transform: translateY(25%);
+}
+
+.card:hover .front-content {
+    transform: translateY(-30%);
+}
+
+.card:hover .front-content p {
+    opacity: 0;
+}
